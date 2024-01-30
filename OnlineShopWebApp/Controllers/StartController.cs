@@ -8,9 +8,9 @@ namespace OnlineShopWebApp.Controllers
 {
     public class StartController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<StartController> _logger;
 
-        public StartController(ILogger<HomeController> logger)
+        public StartController(ILogger<StartController> logger)
         {
             _logger = logger;
         }
