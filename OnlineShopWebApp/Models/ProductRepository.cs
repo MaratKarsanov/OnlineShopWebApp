@@ -9,15 +9,18 @@ namespace OnlineShopWebApp.Models
     public class ProductRepository : IEnumerable<Product>
     {
         private List<Product> Products;
+        public int Count { get; private set; }
 
         public ProductRepository()
         {
             Products = new List<Product>();
+            Count = 0;
         }
 
         public ProductRepository(List<Product> products)
         {
             Products = products;
+            Count = products.Count;
         }
 
         public Product TryGetProductById(int id)
@@ -28,9 +31,12 @@ namespace OnlineShopWebApp.Models
         public void Add(Product product)
         {
             if (TryGetProductById(product.Id) is null)
+            {
                 Products.Add(product);
-            else
-                throw new ArgumentException("Товар с таким id уже есть в репозитории!");
+                Count++;
+                return;
+            }
+            throw new ArgumentException("Товар с таким id уже есть в репозитории!");
         }
 
         public IEnumerator<Product> GetEnumerator()

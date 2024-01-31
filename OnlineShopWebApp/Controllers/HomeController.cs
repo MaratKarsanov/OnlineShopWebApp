@@ -18,7 +18,8 @@ namespace OnlineShopWebApp.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            Products = new ProductRepository(MakeListProducts(5));
+            if (Products is null || Products.Count == 0)
+                Products = new ProductRepository(MakeListProducts(5));
         }
 
         private List<Product> MakeListProducts(int count)
@@ -27,7 +28,7 @@ namespace OnlineShopWebApp.Controllers
             var rnd = new Random();
             for (var i = 0; i < count; i++)
             {
-                result.Add(new Product(rnd.Next(1000), "Name_" + (i + 1), rnd.Next(100, 10000)));
+                result.Add(new Product("Name_" + (i + 1), rnd.Next(100, 10000)));
             }
             return result;
         }
@@ -37,7 +38,7 @@ namespace OnlineShopWebApp.Controllers
             //var products = MakeListProducts(5);
             var result = new StringBuilder();
             foreach (var product in Products)
-                result.Append(product.ToString() + "\n");
+                result.Append(product.ToString() + "\n\n");
             return result.ToString();
         }
 
