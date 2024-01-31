@@ -13,12 +13,12 @@ namespace OnlineShopWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        public static List<Product> Products { get; private set; }
+        public static ProductRepository Products { get; private set; }
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            Products = MakeListProducts(5);
+            Products = new ProductRepository(MakeListProducts(5));
         }
 
         private List<Product> MakeListProducts(int count)
