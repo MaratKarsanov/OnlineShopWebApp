@@ -18,9 +18,20 @@ namespace OnlineShopWebApp.Controllers
             _logger = logger;
         }
 
+        private List<Product> MakeListProducts(int count)
+        {
+            var result = new List<Product>();
+            var rnd = new Random();
+            for (var i = 0; i < count; i++)
+            {
+                result.Add(new Product(rnd.Next(1000), "Name_" + (i + 1), rnd.Next(100, 10000)));
+            }
+            return result;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            return View(); 
         }
 
         public IActionResult Privacy()
