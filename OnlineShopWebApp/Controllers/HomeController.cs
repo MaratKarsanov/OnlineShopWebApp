@@ -13,10 +13,12 @@ namespace OnlineShopWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        public static List<Product> Products { get; private set; }
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            Products = MakeListProducts(5);
         }
 
         private List<Product> MakeListProducts(int count)
@@ -32,9 +34,9 @@ namespace OnlineShopWebApp.Controllers
 
         public string Index()
         {
-            var products = MakeListProducts(5);
+            //var products = MakeListProducts(5);
             var result = new StringBuilder();
-            foreach (var product in products)
+            foreach (var product in Products)
                 result.Append(product.ToString() + "\n");
             return result.ToString();
         }
