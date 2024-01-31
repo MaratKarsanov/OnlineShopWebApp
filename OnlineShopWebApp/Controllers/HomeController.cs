@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
@@ -29,9 +30,13 @@ namespace OnlineShopWebApp.Controllers
             return result;
         }
 
-        public IActionResult Index()
+        public string Index()
         {
-            return View(); 
+            var products = MakeListProducts(5);
+            var result = new StringBuilder();
+            foreach (var product in products)
+                result.Append(product.ToString() + "\n");
+            return result.ToString();
         }
 
         public IActionResult Privacy()
