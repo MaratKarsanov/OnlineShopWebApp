@@ -12,12 +12,13 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        public string Index(int id)
+        public IActionResult Index(int id)
         {
             foreach (var product in HomeController.Products)
                 if (product.Id == id)
-                    return product.ToString();
-            return "Товар с таким id не найден.";
+                    return View(product);
+            return View((object)null);
+
         }
     }
 }

@@ -1,0 +1,15 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<img class="" src="@Model.PictureLink" />
+
+@foreach(var p in typeof(Product).GetProperties().Where(p => p.Name != "PictureLink"))
+{
+    <div>@p.Name: @p.GetValue(Model)</div>
+}
+
+<a class="btn btn-light" style="margin:10px" href="/home/index" role="button">Продолжить покупки</a>
+<a class="btn btn-light" style="margin:10px" href="#" role="button">Добавить в корзину</a>

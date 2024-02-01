@@ -13,7 +13,14 @@ namespace OnlineShopWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        public static ProductRepository Products { get; private set; }
+        public static ProductRepository Products { get; private set; } = new ProductRepository(new List<Product>
+        {
+            new Product("Name1", 10000),
+            new Product("Name2", 20000),
+            new Product("Name3", 30000),
+            new Product("Name4", 40000),
+            new Product("Name5", 50000),
+        });
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -28,18 +35,14 @@ namespace OnlineShopWebApp.Controllers
             var rnd = new Random();
             for (var i = 0; i < count; i++)
             {
-                result.Add(new Product("Name_" + (i + 1), rnd.Next(100, 10000)));
+                result.Add(new Product("Name_" + (i + 1), rnd.Next(10, 100) * 1000));
             }
             return result;
         }
 
-        public string Index()
+        public IActionResult Index()
         {
-            //var products = MakeListProducts(5);
-            var result = new StringBuilder();
-            foreach (var product in Products)
-                result.Append(product.ToString() + "\n\n");
-            return result.ToString();
+            return View(Products);
         }
 
         public IActionResult Privacy()
