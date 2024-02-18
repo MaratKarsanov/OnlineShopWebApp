@@ -1,0 +1,28 @@
+﻿@model Cart
+
+@{
+    ViewData["Title"] = "Index";
+}
+@if (Model is null)
+{
+    <div>Корзина пуста!</div>
+    return;
+}
+<div class="row">
+    @foreach (var e in Model)
+    {
+        <div class="col-3 card shadow">
+            <img class="card-img-top" src="@e.Product.PictureLink" />
+            <div class="card-body">
+                <a style="color: black" href="/product/index/@e.Product.Id">
+                    <h5>@e.Product.Name</h5>
+                </a>
+                <h5>@e.Product.Cost</h5>
+                <p>Количество: @e.Amount</p>
+                <p>Итоговая цена: @(e.TotalCost)</p>
+            </div>
+        </div>
+    }
+</div>
+<div class="">Итого: @Model.TotalCost</div>
+<a class="btn btn-light" style="margin:10px" href="#" role="button">Оформить заказ</a>

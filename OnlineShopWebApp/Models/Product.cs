@@ -1,6 +1,8 @@
-﻿namespace OnlineShopWebApp.Models
+﻿using System;
+
+namespace OnlineShopWebApp.Models
 {
-    public class Product
+    public class Product : IReposytoryItem
     {
         private static int instanceCounter = 0;   
         public int Id { get; }
@@ -11,7 +13,7 @@
         public Product(string name, 
             decimal cost, 
             string description = "", 
-            string pictureLink = "Images/DefaultImg.jpg")
+            string pictureLink = "/Images/DefaultImg.jpg")
         {
             Id = instanceCounter;
             Name = name;
@@ -25,6 +27,24 @@
         {
             //return Id + "\n" + Name + "\n" + Cost + "\n" + Description;
             return $"{Id}\n{Name}\n{Cost}";
+        }
+
+        public static bool operator ==(Product p1, Product p2)
+        {
+            return p1.Id == p2.Id;
+        }
+
+        public static bool operator !=(Product p1, Product p2)
+        {
+            return p1.Id != p2.Id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is null || !(obj is Product))
+                return false;
+            var objAsProduct = (Product)obj;
+            return this == objAsProduct;
         }
     }
 }

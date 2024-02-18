@@ -13,7 +13,7 @@ namespace OnlineShopWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        public static ProductRepository Products { get; private set; } = new ProductRepository(new List<Product>
+        public static Repository<Product> Products { get; private set; } = new Repository<Product>(new List<Product>
         {
             new Product("Name1", 10000),
             new Product("Name2", 20000),
@@ -21,23 +21,16 @@ namespace OnlineShopWebApp.Controllers
             new Product("Name4", 40000),
             new Product("Name5", 50000),
         });
+        public static Repository<Cart> Carts { get; private set; } = new Repository<Cart>(new List<Cart>
+        {
+            new Cart(Constants.UserId)
+        });
 
+        public int CurrentUserId = 0;
+ 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            if (Products is null || Products.Count == 0)
-                Products = new ProductRepository(MakeListProducts(5));
-        }
-
-        private List<Product> MakeListProducts(int count)
-        {
-            var result = new List<Product>();
-            var rnd = new Random();
-            for (var i = 0; i < count; i++)
-            {
-                result.Add(new Product("Name_" + (i + 1), rnd.Next(10, 100) * 1000));
-            }
-            return result;
         }
 
         public IActionResult Index()
