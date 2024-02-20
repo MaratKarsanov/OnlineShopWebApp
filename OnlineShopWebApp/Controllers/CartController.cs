@@ -9,9 +9,18 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
+        private readonly Repository<Product> Products;
+        private readonly Repository<Cart> Carts;
+
+        public CartController(Repository<Product> products, Repository<Cart> carts)
+        {
+            Products = products;
+            Carts = carts;
+        }
+
         public IActionResult Index(int id)
         {
-            foreach (var cart in HomeController.Carts)
+            foreach (var cart in Carts)
                 if (cart.Id == id)
                     if(cart.Items.Count > 0)
                         return View(cart);
@@ -22,8 +31,8 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Add(int productId)
         {
-            var product = HomeController.Products.TryGetElementById(productId);
-            var cart = HomeController.Carts.TryGetElementById(0);
+            var product = Products.TryGetElementById(productId);
+            var cart = Carts.TryGetElementById(0);
             cart.Add(product);
             return RedirectToAction("Index", 0);
         }

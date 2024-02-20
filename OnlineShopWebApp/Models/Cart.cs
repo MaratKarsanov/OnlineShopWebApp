@@ -20,7 +20,7 @@ namespace OnlineShopWebApp.Models
             }
         }
 
-        public Cart(string userId)
+        public Cart(string userId = "UnknownUser")
         {
             UserId = userId;
             //Products = new Dictionary<Product, int>();

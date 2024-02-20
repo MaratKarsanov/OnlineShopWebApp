@@ -10,8 +10,8 @@ namespace OnlineShopWebApp.Models
         public decimal Cost { get; set; }
         public string Description { get; set; }
         public string PictureLink { get; }   
-        public Product(string name, 
-            decimal cost, 
+        public Product(string name = "UnknownProduct", 
+            decimal cost = 0, 
             string description = "", 
             string pictureLink = "/Images/DefaultImg.jpg")
         {

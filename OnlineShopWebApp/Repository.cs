@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace OnlineShopWebApp
 {
-    public class Repository<T> : IEnumerable<T>
+    public class Repository<T> : IRepository<T>, IEnumerable<T>
         where T : IReposytoryItem
     {
         private List<T> Elements;
@@ -23,11 +23,6 @@ namespace OnlineShopWebApp
             Elements = elements.ToList();
         }
 
-        public T TryGetElement(T element)
-        {
-            return Elements.FirstOrDefault(e => element.Equals(e));
-        }
-
         public T TryGetElementById(int id)
         {
             return Elements.FirstOrDefault(e => e.Id == id);
@@ -35,7 +30,7 @@ namespace OnlineShopWebApp
 
         public void Add(T element)
         {
-            if (TryGetElement(element) is null)
+            if (TryGetElementById(element.Id) is null)
                 Elements.Add(element);
             //throw new ArgumentException("Товар с таким id уже есть в репозитории!");
         }
