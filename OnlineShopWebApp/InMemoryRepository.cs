@@ -7,18 +7,18 @@ using System.Linq;
 
 namespace OnlineShopWebApp
 {
-    public class Repository<T> : IRepository<T>, IEnumerable<T>
+    public class InMemoryRepository<T> : IRepository<T>, IEnumerable<T>
         where T : IReposytoryItem
     {
         private List<T> Elements;
         public int Count { get { return Elements.Count; } }
 
-        public Repository()
+        public InMemoryRepository()
         {
             Elements = new List<T>();
         }
 
-        public Repository(IEnumerable<T> elements)
+        public InMemoryRepository(IEnumerable<T> elements)
         {
             Elements = elements.ToList();
         }
