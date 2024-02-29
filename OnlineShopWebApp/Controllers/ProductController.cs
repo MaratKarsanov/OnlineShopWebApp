@@ -12,9 +12,9 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly Repository<Product> Products;
+        private readonly IRepository<Product> Products;
 
-        public ProductController(Repository<Product> products)
+        public ProductController(IRepository<Product> products)
         {
             Products = products;
         }

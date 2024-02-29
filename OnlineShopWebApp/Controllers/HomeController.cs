@@ -13,18 +13,18 @@ namespace OnlineShopWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly Repository<Product> Products;
-        private readonly Repository<Cart> Carts;
+        private readonly IRepository<Product> Products;
+        private readonly IRepository<Cart> Carts;
 
         public int CurrentUserId = 0;
  
         public HomeController(ILogger<HomeController> logger, 
-            Repository<Product> products,
-            Repository<Cart> carts)
+            IRepository<Product> products,
+            IRepository<Cart> carts)
         {
-            //for (var i = 1; i < 6; i++)
-            //    products.Add(new Product("Name" + i, i * 10000));
-            //carts.Add(new Cart(Constants.UserId));
+            for (var i = 1; i < 6; i++)
+                products.Add(new Product("Name" + i, i * 10000));
+            carts.Add(new Cart(Constants.UserId));
             Products = products;
             Carts = carts;
             _logger = logger;

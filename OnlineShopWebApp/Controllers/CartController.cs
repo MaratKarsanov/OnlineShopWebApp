@@ -9,10 +9,10 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private readonly Repository<Product> Products;
-        private readonly Repository<Cart> Carts;
+        private readonly IRepository<Product> Products;
+        private readonly IRepository<Cart> Carts;
 
-        public CartController(Repository<Product> products, Repository<Cart> carts)
+        public CartController(IRepository<Product> products, IRepository<Cart> carts)
         {
             Products = products;
             Carts = carts;
